@@ -1,0 +1,80 @@
+---
+import Layout from "../layouts/Layout.astro"
+import Header from "../components/Header.vue"
+import SearchPokemon from '../useCases/pokemon/SearchPokemon.vue'
+import ShowPokemon from '../useCases/pokemon/ShowPokemon.svelte'
+import FlagsChooser from '../components/FlagsChooser.vue'
+---
+
+<Layout title="Welcome to Astro.">
+    <div class="page-wrapper with-navbar">
+        <Header />
+        <div class="content-wrapper">
+            <main>
+                <div class="Head">
+                    <h1>
+                        Search pokemon
+                    </h1>
+                </div>
+                <br />
+                <div class="Pokemon">
+                    <div>
+                        <FlagsChooser client:load/>
+                        <br />
+                        <br />
+                        <SearchPokemon client:load />
+                    </div>
+                    <div>
+                        <ShowPokemon client:load />
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+</Layout>
+<script>
+    import('halfmoon/css/halfmoon-variables.min.css')
+    import('flag-icons/css/flag-icons.min.css')
+    import halfmoon from 'halfmoon'
+
+    halfmoon.onDOMContentLoaded()
+</script>
+<style>
+    :root {
+        --astro-gradient: linear-gradient(0deg, #4f39fa, #da62c4);
+    }
+
+    body {
+        width: 100%;
+        overflow-x: hidden;
+    }
+
+    main {
+        width: 80%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .Head {
+        display: flex;
+        align-items: center;
+        border-bottom: 1px #ddd solid;
+        padding-bottom: 10px;
+        padding-top: 20px;
+    }
+
+    .Head h1 {
+        flex: 1;
+        margin: 0;
+    }
+
+    .Pokemon {
+        margin-top: 30px;
+        display: flex;
+    }
+
+    .Pokemon div {
+        flex: 1;
+    }
+
+</style>
