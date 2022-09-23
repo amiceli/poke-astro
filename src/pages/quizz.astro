@@ -1,0 +1,47 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Header from "../components/Header.vue";
+import QuizPokemon from "../useCases/pokemon/pokequizz/QuizPokemon.svelte";
+
+---
+<Layout title="Welcome to Astro.">
+    <div class="page-wrapper with-navbar">
+        <Header client:only />
+        <div class="content-wrapper">
+            <main>
+                <div class="Head text-center">
+                    <h1>PokéQuiz</h1>
+                </div>
+                <QuizPokemon client:load />
+            </main>
+        </div>
+    </div>
+</Layout>
+
+<script>
+    import("halfmoon/css/halfmoon-variables.min.css");
+    import("flag-icons/css/flag-icons.min.css");
+    import halfmoon from "halfmoon";
+
+    halfmoon.onDOMContentLoaded();
+    halfmoon.toggleDarkMode();
+</script>
+
+<style lang="scss">
+    :root {
+        --astro-gradient: linear-gradient(0deg, #4f39fa, #da62c4);
+    }
+
+    .PokeQuiz {
+        margin-top: 30px;
+        width: 80%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    main {
+        width: 80%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+</style>
