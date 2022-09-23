@@ -1,5 +1,5 @@
 import { atom, map } from 'nanostores'
-import { Pokemon, searchPokemon } from './PokemonRepository'
+import { Pokemon, searchPokemon } from '../api/PokemonRepository'
 
 export const isLoading = atom(false)
 

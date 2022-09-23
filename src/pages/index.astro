@@ -1,14 +1,13 @@
 ---
 import Layout from "../layouts/Layout.astro"
 import Header from "../components/Header.vue"
-import SearchPokemon from '../useCases/pokemon/SearchPokemon.vue'
-import ShowPokemon from '../useCases/pokemon/ShowPokemon.svelte'
-import FlagsChooser from '../components/FlagsChooser.vue'
+import SearchPokemon from '../useCases/pokemon/pokedex/SearchPokemon.vue'
+import ShowPokemon from '../useCases/pokemon/pokedex/ShowPokemon.svelte'
 ---
 
 <Layout title="Welcome to Astro.">
     <div class="page-wrapper with-navbar">
-        <Header />
+        <Header client:load />
         <div class="content-wrapper">
             <main>
                 <div class="Head">
@@ -19,9 +18,6 @@ import FlagsChooser from '../components/FlagsChooser.vue'
                 <br />
                 <div class="Pokemon">
                     <div>
-                        <FlagsChooser client:load/>
-                        <br />
-                        <br />
                         <SearchPokemon client:load />
                     </div>
                     <div>
@@ -32,13 +28,16 @@ import FlagsChooser from '../components/FlagsChooser.vue'
         </div>
     </div>
 </Layout>
+
 <script>
     import('halfmoon/css/halfmoon-variables.min.css')
     import('flag-icons/css/flag-icons.min.css')
     import halfmoon from 'halfmoon'
 
     halfmoon.onDOMContentLoaded()
+    halfmoon.toggleDarkMode()
 </script>
+
 <style>
     :root {
         --astro-gradient: linear-gradient(0deg, #4f39fa, #da62c4);

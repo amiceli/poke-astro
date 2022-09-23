@@ -25,7 +25,7 @@ import { useStore } from '@nanostores/vue'
 import { loadPokemon, isLoading } from './store'
 
 export default defineComponent({
-    setup() {
+    setup(props) {
         const search = ref('')
         const isSearching = useStore(isLoading)
 
