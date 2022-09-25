@@ -11,38 +11,35 @@
 </script>
 
 <div class="Quiz">
-    {#if $isLoading === true}
-        <div class="Quiz__loading">
-            <x-loader></x-loader>
-        </div>
-    {:else}
-        <div class="Quiz__wrap">
-            <div>
-                <SearchPokemon />
+    <div class="nes-container is-dark with-title is-centered">
+        <p class="title">
+            {#if $isLoading === true}
+                loading
+            {:else}
+                Pokéquiz
+            {/if}
+        </p>
+        {#if $isLoading === true}
+            <div class="text-center">
+                <x-loader></x-loader>
             </div>
-            <div class="center">
-                <PreviewPokemon />
+        {:else}
+            <div class="Quiz__wrap">
+                <div>
+                    <SearchPokemon />
+                </div>
+                <div class="center">
+                    <PreviewPokemon />
+                </div>
             </div>
-        </div>
-    {/if}
+        {/if}
+    </div>
 </div>
 
 <style lang="scss" scoped>
     .Quiz {
         display: block;
         width: 100%;
-
-        &__loading {
-            background : #26282C;
-            position : fixed;
-            top : 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
 
         .center {
             text-align: center;

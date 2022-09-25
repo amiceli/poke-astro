@@ -1,46 +1,27 @@
 ---
-import Layout from "../layouts/Layout.astro"
-import Header from "../components/Header.vue"
-import SearchPokemon from '../useCases/pokemon/pokedex/SearchPokemon.vue'
-import ShowPokemon from '../useCases/pokemon/pokedex/ShowPokemon.svelte'
+import Layout from "../layouts/Layout.astro";
+import Header from "../components/Header.vue";
+import SearchPokemon from "../useCases/pokemon/pokedex/SearchPokemon.vue";
+import ShowPokemon from "../useCases/pokemon/pokedex/ShowPokemon.svelte";
 ---
 
-<Layout title="Welcome to Astro.">
-    <div class="page-wrapper with-navbar">
-        <Header client:only />
-        <div class="content-wrapper">
-            <main>
-                <div class="Head text-center">
-                    <h1>PokéQuiz</h1>
-                </div>
-                <br />
-                <div class="Pokemon">
-                    <div>
-                        <SearchPokemon client:load />
-                    </div>
-                    <div>
-                        <ShowPokemon client:load />
-                    </div>
-                </div>
-            </main>
+<Layout title="Poke-astro">
+    <Header client:only />
+    <div class="Index">
+        <div class="nes-container is-dark with-title is-centered">
+            <p class="title">Pokédex</p>
+            <SearchPokemon client:load />
+            <br />
+            <ShowPokemon client:load />
         </div>
     </div>
 </Layout>
 
-<script>
-    import('halfmoon/css/halfmoon-variables.min.css')
-    import('flag-icons/css/flag-icons.min.css')
-    import halfmoon from 'halfmoon'
-
-    halfmoon.onDOMContentLoaded()
-    halfmoon.toggleDarkMode()
-</script>
-
-<style>
-    main {
+<style lang="scss" scoped>
+    .Index {
+        margin-top: 50px;
         width: 80%;
         margin-left: auto;
         margin-right: auto;
     }
-
 </style>

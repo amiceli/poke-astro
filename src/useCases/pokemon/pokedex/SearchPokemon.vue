@@ -1,14 +1,11 @@
 <template>
     <div class="Search">
-        <div class="form-group">
-            <label
-                for="pokemon-name"
-                class="required"
-            >Pokemon name</label>
+        <div class="nes-field">
+            <label for="pokemon-name" class="required">Pokemon name</label>
             <input
                 type="text"
                 v-model="search"
-                class="form-control"
+                class="nes-input"
                 id="pokemon-name"
                 placeholder="Pikachu for example"
                 @change="onChange()"
@@ -44,8 +41,12 @@ export default defineComponent({
 
 </script>
 
-<style scoped>
-.Search {
-    width: 100%;
-}
+<style scoped lang="scss">
+    .Search {
+        width: 100%;
+
+        .nes-field {
+            text-align: left;
+        }
+    }
 </style>

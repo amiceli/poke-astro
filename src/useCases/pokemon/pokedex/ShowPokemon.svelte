@@ -6,82 +6,76 @@
 
 <div class="Show">
     <div 
-        class="Show__card"
+        class="nes-container is-dark with-title"
         class:is--loading={$isLoading}
         class:is--wating={$pokemon === null && !$notFound}
     >
+        <p class="title">
+
+            {#if $isLoading}
+                loading
+            {:else if $pokemon === null && !$notFound}
+                waiting
+            {:else if $notFound === true}
+                <a
+                    href="https://veekun.com/dex/pokemon/{$pokemon404.name}"
+                    target="_blank"
+                >
+                    { $lang === 'fr' ? $pokemon404.frName : $pokemon404.name}
+                </a>
+            {:else if $pokemon !== null}
+                <a
+                    href="https://veekun.com/dex/pokemon/{$pokemon.name}"
+                    target="_blank"
+                >
+                    { $lang === 'fr' ? $pokemon.frName : $pokemon.name}
+                </a>
+            {/if}
+
+        </p>
+
         {#if $isLoading}
             <x-loader></x-loader>
         {:else if $pokemon === null && !$notFound}
-            ?
+            <span class="for--search">?</span>
         {:else if $pokemon !== null}
-            <div class="Show__card__pokemon">
-                <div class="text-center">
-                    <img
-                        src={$pokemon.sprite}
-                        class="img-fluid rounded-top"
-                        alt="..."
-                    />
-                    <br />
-                    {#if $lang === 'fr'}
-                        <h3>
-                            <a
-                                href="https://veekun.com/dex/pokemon/{$pokemon.name}"
-                                target="_blank"
-                            >
-                                {$pokemon.frName}
-                            </a>
-                        </h3>
-                    {:else}
-                    <h3>
-                        <a
-                            href="https://veekun.com/dex/pokemon/{$pokemon.name}"
-                            target="_blank"
-                        >
-                            {$pokemon.name}
-                        </a>
-                    </h3>
-                    {/if}
-                    {#each $pokemon.types as type, index}
-                        <img 
-                            src={`https://veekun.com/dex/media/types/en/${type}.png`} 
-                            alt=""
-                            class="for--type"
-                        />
-                        {#if index > 0}
-                            &nbsp;
-                        {/if}
-                    {/each}
-                </div>
+            <div class="text-center">
+                <img
+                    src={$pokemon.sprite}
+                    class="img-fluid rounded-top"
+                    alt="..."
+                />
             </div>
-            <div class="for--order">
-                #{$pokemon.order}
-            </div>
+            <br/>
+            {#each $pokemon.types as type, index}
+                <img 
+                    src={`https://veekun.com/dex/media/types/en/${type}.png`} 
+                    alt=""
+                    class="for--type"
+                />
+                {#if index > 0}
+                    &nbsp;
+                {/if}
+            {/each}
+            <span class="nes-text is-disabled for--order">
+                #{$pokemon.id}
+            </span>
         {:else if $notFound === true}
-            <div class="Show__card__pokemon">
-                <div class="text-center">
-                    <img
-                        src={$pokemon404.sprite}
-                        class="img-fluid rounded-top"
-                        alt="..."
-                    />
-                    <br />
-                    {#if $lang === 'fr'}
-                        <h3>{$pokemon404.frName}</h3>
-                    {:else}
-                        {$pokemon404.name}
-                    {/if}
-                    {#each $pokemon404.types as type, index}
-                        {type} 
-                        {#if index > 0}
-                            &nbsp;
-                        {/if}
-                    {/each}
-                </div>
-            </div>
-            <div class="for--order">
-                #{$pokemon404.id} (not found ^^)
-            </div>
+            <img
+                src={$pokemon404.sprite}
+                class="img-fluid rounded-top"
+                alt="..."
+            />
+            {#each $pokemon404.types as type, index}
+                <img 
+                    src={`https://veekun.com/dex/media/types/en/${type}.png`} 
+                    alt=""
+                    class="for--type"
+                />
+                {#if index > 0}
+                    &nbsp;
+                {/if}
+            {/each}
         {/if}
     </div>
 </div>
@@ -97,41 +91,27 @@
             align-items: center;
         }
 
-        &__card {
-            width: 300px;
-            height: 400px;
-            border : 1px white solid;
+        .for--search {
+            font-size: 100px;
+        }
+
+        .nes-container {
+            position: relative;
+            width: 500px;
             margin-left: auto;
             margin-right: auto;
-            padding: 20px;
-            position: relative;
-
-            &__pokemon {
-                img {
-                    width: 150px;
-                }
-            }
 
             .for--order {
-                position: absolute;
-                right: 10px;
-                bottom: 10px;
-                font-size: 20px;
+                display: block;
+                text-align: right;
+                margin-top: 20px;
             }
 
             .for--type {
-                height: 20px;
-                width: unset;
+                height: 30px;
             }
-
-            &.is--loading {
-                @include flexCenter();
-            }
-
-            &.is--wating {
-                @include flexCenter();
-
-                font-size: 100px;
+            img {
+                width: 150px;
             }
         }
     }

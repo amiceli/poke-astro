@@ -6,8 +6,6 @@
             @click="changeLang('fr')"
         >
             <span class="fi fi-fr"></span>
-            &nbsp;
-            French
         </span>
         &nbsp;
         <span 
@@ -16,8 +14,6 @@
             @click="changeLang('en')"
         >
             <span class="fi fi-gb"></span>
-            &nbsp;
-            English
         </span>
     </div>
 </template>
@@ -33,7 +29,11 @@
 
 <style lang="scss" scoped>
     .FlagChooser {
-        display: inline-block;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+        padding-right: 30px;
 
         &__flag {
             padding: 10px;

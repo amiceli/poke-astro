@@ -1,52 +1,81 @@
 <template>
-    <nav class="navbar">
-        <a href="#" class="navbar-brand">
+    <nav class="Header">
+        <a href="#">
             <img 
                 src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/25.png"
-                alt="pikachu"
+                alt="pikachu" 
             />
-            {{ name }}
+            <span class="nes-text is-success">{{ name }}</span>
         </a>
-        <span class="navbar-text text-monospace">v1.0</span>
-        <ul class="navbar-nav d-none d-md-flex">
-            <li class="nav-item active">
-                <a href="/quizz" class="nav-link">
-                    PokéQuizz
-                </a>
-            </li>
-            <li class="nav-item">
-                <a href="/" class="nav-link">
-                    Pokédex light
-                </a>
-            </li>
-        </ul>
-        <div class=" d-md-flex ml-auto">
+        <span class="nes-text is-disabled">v1.0</span>
+        <div class="Header__links">
+            <a 
+                href="/quizz" 
+                class="nav-link"
+            >
+                <span class="nes-text is-primary">PokéQuizz</span>
+            </a>
+            <a href="/" class="nav-link">
+                <span class="nes-text is-primary">Pokédex light</span>
+            </a>
+        </div>
+        <div class="Header__flags">
             <FlagsChooser />
         </div>
     </nav>
 </template>
 
 <script lang="ts">
-    import { defineComponent } from "vue"
-    import FlagsChooser from '../useCases/changeLang/FlagsChooser.vue'
+import { defineComponent } from "vue"
+import FlagsChooser from '../useCases/changeLang/FlagsChooser.vue'
 
-    export default defineComponent({
-        components: { FlagsChooser },
-        setup() {
-            return { name: 'Pokastro' }
-        }
-    })
+export default defineComponent({
+    components: { FlagsChooser },
+    setup() {
+        return { name: 'Pokastro' }
+    }
+})
 </script>
 
 <style lang="scss" scoped>
-    .navbar img {
-        width: 50px;
-        height: 50px;
-    }
+.Header {
+    width: 100%;
+    border-bottom: 4px solid #D3D3D3;
+    height: 70px;
+    display: grid;
+    grid-template-columns: auto auto 1fr auto;
+    box-sizing: border-box;
 
-    .navbar {
-        .d-md-flex {
-            margin-right: 20px;
+    &__links {
+        display: flex;
+
+        a {
+            padding-right: 10px;
+            text-decoration-color: #209cee;
         }
     }
+
+    a {
+        display: flex;
+        align-items: center;
+        color: white;
+
+        img {
+            height: 60px;
+        }
+    }
+
+    a+span {
+        display: flex;
+        align-items: center;
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+
+    ul {
+        a {
+            color: red;
+        }
+    }
+}
 </style>

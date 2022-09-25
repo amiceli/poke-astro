@@ -90,15 +90,18 @@
     <div class="text-center">
         {#if !($found || $notFound)}
             <button 
-                class="btn" 
-                type="button"
+                type="button" 
+                class="nes-btn"
                 disabled={inputs.some( ({value}) => value === '' )}
                 on:click={() => { validateInputs() }}
-            >Validate</button>
+                class:is-disabled={inputs.some( ({value}) => value === '' )}
+            >
+                Validate
+            </button>
         {:else}
             <button 
-                class="btn btn-primary" 
-                type="button"
+                type="button" 
+                class="nes-btn is-primary"
                 on:click={() => { reload() }}
             >
                 Rejouer

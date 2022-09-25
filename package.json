@@ -22,8 +22,8 @@
   "dependencies": {
     "@nanostores/vue": "^0.5.5",
     "flag-icons": "^6.6.4",
-    "halfmoon": "^1.1.1",
     "nanostores": "^0.6.0",
+    "nes.css": "^2.3.0",
     "pokeapi-js-wrapper": "^1.2.2",
     "pokemon": "^2.3.3"
   }

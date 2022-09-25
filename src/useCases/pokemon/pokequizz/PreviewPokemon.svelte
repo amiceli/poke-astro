@@ -1,18 +1,5 @@
 <script lang="ts">
     import { pokemon, tries, found, notFound } from "./store";
-
-    const getPokemonTypesURL = () : string [] => {
-        if (pokemon.get()) {
-            return [...new Set(pokemon.get().types)].map((type : string) => {
-                const typeName = type.charAt(0).toUpperCase() + type.slice(1)
-                console.debug(typeName)
-
-                return `https://duiker101.github.io/pokemon-type-svg-icons/icons/${type}.svg`
-            })
-        }
-
-        return []
-    }
 </script>
 
 <div class="PreviewPokemon">
@@ -23,11 +10,22 @@
             alt="..." 
             style="--opacity: {($found || $notFound) ? 0 : (( 5 - $tries) * 5) + 'px'}"
         />
-        {#if $tries > 2}
-            {#each getPokemonTypesURL() as src}
-                <img {src} alt="" class="is--small" />
-            {/each}
-        {/if}    
+        <br />
+        <br />
+        <div>
+            {#if $tries > 2 || $found}
+                {#each $pokemon.types as type, index}
+                    <img
+                        src={`https://veekun.com/dex/media/types/en/${type}.png`}
+                        alt=""
+                        class="for--type"
+                    />
+                    {#if index > 0}
+                        &nbsp;
+                    {/if}
+                {/each}
+            {/if}
+        </div>    
     {/if} 
 </div>
 
@@ -38,16 +36,13 @@
         img {
             vertical-align: middle;
 
-            &:not(.is-small) {
+            &:not(.for--type) {
                 filter: blur(var(--opacity));
+                width: 300px;
             }
 
-            &.is--small {
-                width: 50px;
-
-                &:last-of-type {
-                    margin-left: 20px;
-                }
+            &.for--type {
+                height: 50px;
             }
         }
     }
