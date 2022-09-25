@@ -24,12 +24,30 @@
                     />
                     <br />
                     {#if $lang === 'fr'}
-                        <h3>{$pokemon.frName}</h3>
+                        <h3>
+                            <a
+                                href="https://veekun.com/dex/pokemon/{$pokemon.name}"
+                                target="_blank"
+                            >
+                                {$pokemon.frName}
+                            </a>
+                        </h3>
                     {:else}
-                        {$pokemon.name}
+                    <h3>
+                        <a
+                            href="https://veekun.com/dex/pokemon/{$pokemon.name}"
+                            target="_blank"
+                        >
+                            {$pokemon.name}
+                        </a>
+                    </h3>
                     {/if}
                     {#each $pokemon.types as type, index}
-                        {type} 
+                        <img 
+                            src={`https://veekun.com/dex/media/types/en/${type}.png`} 
+                            alt=""
+                            class="for--type"
+                        />
                         {#if index > 0}
                             &nbsp;
                         {/if}
@@ -99,6 +117,11 @@
                 right: 10px;
                 bottom: 10px;
                 font-size: 20px;
+            }
+
+            .for--type {
+                height: 20px;
+                width: unset;
             }
 
             &.is--loading {
