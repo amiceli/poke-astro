@@ -33,9 +33,28 @@ async function getFrenchName (name : string) : Promise<string> {
     return frName
 }
 
+export async function checkIfNameIsEngligh (name : string) : Promise<string> {
+    const frModule = await import('pokemon/data/fr.json')
+    const enModule = await import('pokemon/data/en.json')
+
+    // @ts-ignore
+    const enIndex = enModule.default.indexOf(name)
+    // @ts-ignore
+    const frIndex = frModule.default.indexOf(name)
+
+    if (enIndex < 0 && frIndex > 0) {
+        // @ts-ignore
+        return enModule.default[frIndex]
+    } 
+
+    return name
+}
+
 export async function searchPokemon(name: string, lang : string): Promise<Pokemon | null> {
     try {
-        const json = await pokedex.getPokemonByName(name.toLowerCase())
+        const correctName = await checkIfNameIsEngligh(name)
+
+        const json = await pokedex.getPokemonByName(correctName.toLowerCase())
         const pokemon: Pokemon = {
             id : json.id,
             name: json.name,
@@ -46,8 +65,7 @@ export async function searchPokemon(name: string, lang : string): Promise<Pokemo
         }
 
         if (lang === 'fr') {
-            const frName = await getFrenchName(name)
-
+            const frName = await getFrenchName(correctName)
             pokemon.frName = frName.toLowerCase()
         }
 
