@@ -1,72 +1,115 @@
 <script>
-    import { isLoading, pokemon, notFound } from "./store";
+    import { isLoading, pokemon, notFound, pokemon404 } from "./store";
+    import { lang } from "../../changeLang/store";
+    import { Loader } from '../../../components/Loader'
 </script>
 
 <div class="Show">
-    <div class="w-400 mw-full">
-        <div class="card p-0">
-            {#if $pokemon === null}
-                <div class="is--tac">
-                    <img
-                        src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Pok%C3%A9_Ball_icon.svg/1024px-Pok%C3%A9_Ball_icon.svg.png"
-                        class="img-fluid rounded-top"
-                        alt="..."
-                    />
-                </div>
-            {:else}
-                <div class="is--tac">
+    <div 
+        class="Show__card"
+        class:is--loading={$isLoading}
+        class:is--wating={$pokemon === null && !$notFound}
+    >
+        {#if $isLoading}
+            <x-loader></x-loader>
+        {:else if $pokemon === null && !$notFound}
+            ?
+        {:else if $pokemon !== null}
+            <div class="Show__card__pokemon">
+                <div class="text-center">
                     <img
                         src={$pokemon.sprite}
                         class="img-fluid rounded-top"
                         alt="..."
                     />
-                </div>
-            {/if}
-
-            <div class="content">
-                <h2 class="content-title">
-                    {#if $isLoading}
-                        loading...
-                    {:else if $pokemon === null && $notFound === true}
-                        Pokémon Not found !
-                    {:else if $pokemon === null && $notFound === false}
-                        <div class="is--tac">Start to search</div>
+                    <br />
+                    {#if $lang === 'fr'}
+                        <h3>{$pokemon.frName}</h3>
                     {:else}
                         {$pokemon.name}
                     {/if}
-                </h2>
-                {#if $isLoading === false && $pokemon !== null}
-                    <p class="text-muted">
-                        Order : {$pokemon.order} <br />
-                        Types : {$pokemon.types} <br />
-                    </p>
-                    <div class="text-right">
-                        <a
-                            href="https://veekun.com/dex/pokemon/{$pokemon.name}"
-                            class="btn"
-                        >
-                            Read more
-                        </a>
-                    </div>
-                {/if}
+                    {#each $pokemon.types as type, index}
+                        {type} 
+                        {#if index > 0}
+                            &nbsp;
+                        {/if}
+                    {/each}
+                </div>
             </div>
-        </div>
+            <div class="for--order">
+                #{$pokemon.order}
+            </div>
+        {:else if $notFound === true}
+            <div class="Show__card__pokemon">
+                <div class="text-center">
+                    <img
+                        src={$pokemon404.sprite}
+                        class="img-fluid rounded-top"
+                        alt="..."
+                    />
+                    <br />
+                    {#if $lang === 'fr'}
+                        <h3>{$pokemon404.frName}</h3>
+                    {:else}
+                        {$pokemon404.name}
+                    {/if}
+                    {#each $pokemon404.types as type, index}
+                        {type} 
+                        {#if index > 0}
+                            &nbsp;
+                        {/if}
+                    {/each}
+                </div>
+            </div>
+            <div class="for--order">
+                #{$pokemon404.id} (not found ^^)
+            </div>
+        {/if}
     </div>
 </div>
 
-<style>
+<style lang="scss" scoped>
     .Show {
         display: inline-block;
-    }
-    .Show h2 {
-        margin: 0;
-    }
-    .Show .is--tac {
-        text-align: center;
-        padding-top: 10px;
-    }
-    .Show img {
-        height: 100px;
-        margin: auto;
+        width: 100%;
+
+        @mixin flexCenter () {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        &__card {
+            width: 300px;
+            height: 400px;
+            border : 1px white solid;
+            margin-left: auto;
+            margin-right: auto;
+            padding: 20px;
+            position: relative;
+
+            &__pokemon {
+                img {
+                    width: 150px;
+                }
+            }
+
+            .for--order {
+                position: absolute;
+                right: 10px;
+                bottom: 10px;
+                font-size: 20px;
+            }
+
+            &.is--loading {
+                @include flexCenter();
+            }
+
+            &.is--wating {
+                @include flexCenter();
+
+                font-size: 100px;
+            }
+        }
     }
 </style>

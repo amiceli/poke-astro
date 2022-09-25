@@ -13,6 +13,7 @@
                 placeholder="Pikachu for example"
                 @change="onChange()"
                 :disabled="isSearching"
+                autocomplete="off"
             >
         </div>
     </div>
@@ -31,7 +32,9 @@ export default defineComponent({
 
         const onChange = () => {
             if (search.value.length > 0) {
-                loadPokemon(search.value)
+                const upper = (search.value).charAt(0).toUpperCase() + (search.value).slice(1)
+
+                loadPokemon(upper)
             }
         }
 

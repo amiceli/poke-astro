@@ -7,13 +7,11 @@ import ShowPokemon from '../useCases/pokemon/pokedex/ShowPokemon.svelte'
 
 <Layout title="Welcome to Astro.">
     <div class="page-wrapper with-navbar">
-        <Header client:load />
+        <Header client:only />
         <div class="content-wrapper">
             <main>
-                <div class="Head">
-                    <h1>
-                        Search pokemon
-                    </h1>
+                <div class="Head text-center">
+                    <h1>PokéQuiz</h1>
                 </div>
                 <br />
                 <div class="Pokemon">
@@ -39,41 +37,10 @@ import ShowPokemon from '../useCases/pokemon/pokedex/ShowPokemon.svelte'
 </script>
 
 <style>
-    :root {
-        --astro-gradient: linear-gradient(0deg, #4f39fa, #da62c4);
-    }
-
-    body {
-        width: 100%;
-        overflow-x: hidden;
-    }
-
     main {
         width: 80%;
         margin-left: auto;
         margin-right: auto;
-    }
-
-    .Head {
-        display: flex;
-        align-items: center;
-        border-bottom: 1px #ddd solid;
-        padding-bottom: 10px;
-        padding-top: 20px;
-    }
-
-    .Head h1 {
-        flex: 1;
-        margin: 0;
-    }
-
-    .Pokemon {
-        margin-top: 30px;
-        display: flex;
-    }
-
-    .Pokemon div {
-        flex: 1;
     }
 
 </style>
