@@ -1,5 +1,5 @@
 import { Pokedex } from 'pokeapi-js-wrapper'
-import pk from 'pokemon'
+import * as pk from 'pokemon'
 
 export type Pokemon = {
     name: string,

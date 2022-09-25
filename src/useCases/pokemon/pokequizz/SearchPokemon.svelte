@@ -77,12 +77,15 @@
             <input
                 autocomplete="off"
                 type="text"
+                class="nes-input is-dark"
                 id="pokemon-letter"
                 bind:value={item.value}
                 on:input={(event) => { selectNextInput(index) }}
                 maxlength="1"
                 disabled={item.correct || $tries === 5 || ($found || $notFound)}
-                class="{(item.correct === false && $notFound) ? 'is--small is--error' : 'is--small'}"
+                class:is--small={true}
+                class:is-error={item.correct === false && $notFound}
+                class:is-success={item.correct || $tries === 5 || ($found || $notFound)}
             />
         {/each}
     </div>
@@ -146,30 +149,17 @@
             text-align: center;
 
             input.is--small {
+                padding: 0;
                 width: 50px;
                 height: 50px;
                 font-size: 20px;
-                background : #121417;
+                background-color:#212529;
                 box-shadow: none;
                 color : white;
                 text-align: center;
-                border: 10px solid;
-                border-image-slice: 1;
-                border-width: 1px;
-                border-image-source: linear-gradient(to left, #743ad5, #d53a9d);
                 margin-left: 10px;
                 margin-right: 10px;
                 text-transform: uppercase;
-
-                &:disabled {
-                    border-image-source: linear-gradient(to left, #00C853, #B2FF59);
-                    color : #00C853;
-                }
-
-                &.is--error {
-                    border-image-source : linear-gradient(to right, darkred, #C80000);
-                    color : orange;
-                }
             }
         }
 
