@@ -86,7 +86,28 @@
             />
         {/each}
     </div>
-    <br />
+    <div class="Search__hearts">
+        <i 
+            class="nes-icon is-large heart"
+            class:is-empty={$tries >= 5 || $notFound}
+        ></i>
+        <i 
+            class="nes-icon is-large heart"
+            class:is-empty={$tries >= 4}
+        ></i>
+        <i 
+            class="nes-icon is-large heart"
+            class:is-empty={$tries >= 3}
+        ></i>
+        <i 
+            class="nes-icon is-large heart"
+            class:is-empty={$tries >= 2}
+        ></i>
+        <i 
+            class="nes-icon is-large heart"
+            class:is-empty={$tries >= 1}
+        ></i>
+    </div>
     <div class="text-center">
         {#if !($found || $notFound)}
             <button 
@@ -115,6 +136,12 @@
         width: 100%;
         margin-top: 40px;
 
+        &__hearts {
+            margin-top: 20px;
+            i {
+                font-size: 15px;
+            }
+        }
         &__inputs {
             text-align: center;
 
