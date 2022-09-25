@@ -13,7 +13,6 @@ export type Pokemon = {
 const pokedex = new Pokedex()
 
 export async function getRandomPokemon(lang : string): Promise<Pokemon | null> {
-    // const randomName : string = pk.random()
     const randomIndex = Math.floor(Math.random() * 151) + 1
     
     const randomName = pk.getName(randomIndex)
