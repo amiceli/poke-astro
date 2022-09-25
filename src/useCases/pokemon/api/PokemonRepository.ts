@@ -54,6 +54,7 @@ export async function searchPokemon(name: string, lang : string): Promise<Pokemo
         const correctName = await checkIfNameIsEngligh(name)
 
         const json = await pokedex.getPokemonByName(correctName.toLowerCase())
+
         const pokemon: Pokemon = {
             id : json.id,
             name: json.name,
