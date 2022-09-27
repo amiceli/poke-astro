@@ -18,6 +18,9 @@
             <a href="/" class="nav-link">
                 <span class="nes-text is-primary">Pokédex light</span>
             </a>
+            <a href="/labo" class="nav-link">
+                <span class="nes-text is-primary">PokéLabo</span>
+            </a>
         </div>
         <div class="Header__flags">
             <FlagsChooser />
