@@ -6,13 +6,13 @@ import ShowPokemon from "../useCases/pokemon/pokedex/ShowPokemon.svelte";
 ---
 
 <Layout title="Poke-astro">
-    <Header client:only />
+    <Header client:only="vue" />
     <div class="Index">
         <div class="nes-container is-dark with-title is-centered">
             <p class="title">Pokédex</p>
-            <SearchPokemon client:load />
+            <SearchPokemon client:only="vue" />
             <br />
-            <ShowPokemon client:load />
+            <ShowPokemon client:only="svelte" />
         </div>
     </div>
 </Layout>

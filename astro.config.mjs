@@ -7,5 +7,5 @@ import solid from "@astrojs/solid-js";
 
 // https://astro.build/config
 export default defineConfig({
-  integrations: [vue(), svelte(), lit(), solid()]
+  integrations: [svelte(), lit(), vue(), solid()]
 });

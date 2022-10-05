@@ -5,9 +5,9 @@ import QuizPokemon from "../useCases/pokemon/pokequizz/QuizPokemon.svelte";
 
 ---
 <Layout title="poke-astro">
-    <Header client:only />
+    <Header client:only="vue" />
     <div class="Quiz">
-        <QuizPokemon client:load />
+        <QuizPokemon client:only="svelte" />
     </div>
 </Layout>
 
